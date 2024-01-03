@@ -1,13 +1,21 @@
 'use client'
-import React, { useState } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import InputSelectTpDoc from './InputSelectTpDoc';
 import 'tailwindcss/tailwind.css';
 import TypeSex from './TypeSex';
 import ContInputText from './ContInputText';
 import ContInputSelect from './ContInputSelect';
 import InputTextarea from './InputTextarea';
+import InputDateReport from './InputDateReport';
+import { saveData } from '@/functions/saveData';
+import { Icon } from '@iconify/react';
+import AlertSaving from '@/elements/AlertSaving';
 
 const FormReport = () => {
+  const [status, setStatus] = useState(false);
+  const [saving, setSaving] = useState(false);
+
   const [data, setData] = useState(
     {
       tpDoc: '',
@@ -27,9 +35,25 @@ const FormReport = () => {
       observaciones: ''
     }
   );
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(data);
+    setSaving(true);
+    await saveData(data).then((res)=>{
+      if(res.status === 200){
+        setStatus(res.status);
+        setTimeout(() => {
+          window.location.reload();
+          setSaving(false);
+        }, 3000);
+      } else if(res.status !== 200){
+        setStatus(res.status);
+        setSaving(false);
+        setTimeout(() => {
+          setStatus(false);
+        }, 3000);
+      }
+    })
+
   };
 
 
@@ -65,8 +89,9 @@ const FormReport = () => {
                 <TypeSex setData={setData} />
             </div>
             <div className='w-6/12 overflow-hidden'>
-              <p>Fecha de reporte:</p>
-                <input type="date" className='border-2 outline-gray-200 rounded py-[2px] px-2 w-full'/>
+              <InputDateReport 
+                setData={setData}
+              />
             </div>
           </div>
 
@@ -158,8 +183,32 @@ const FormReport = () => {
           </div>
 
           <div className='w-full pt-6 pb-4 flex justify-center'>
-            <button className='bg-green-600 text-white px-20 py-2 rounded shadow-md ' type='submit'>Enviar</button>
+            <button
+              disabled={saving}
+              className='bg-green-600 text-white px-20 py-2 rounded shadow-md flex justify-center items-center' 
+              type='submit'
+            >
+              {saving ?
+                <Icon width={25} color='white' icon="line-md:loading-twotone-loop" />
+                :
+                'Enviar'
+              }
+            </button>
           </div>
+
+          {status === 200 ? 
+            <AlertSaving
+              text='Guardado exitosamente'
+              colorIcon='2bd35e'
+              icon='line-md:circle-to-confirm-circle-twotone-transition'
+            />
+            : status !== false && status !== 200 &&
+            <AlertSaving
+              text='Hubo un error al intentar enviar, guarde la informacion e intente mas tarde'
+              colorIcon='#e44444'
+              icon='line-md:cancel-twotone'
+            />
+          } 
         </form>
     </div>
   );

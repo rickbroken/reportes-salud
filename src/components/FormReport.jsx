@@ -11,6 +11,8 @@ import InputDateReport from './InputDateReport';
 import { saveData } from '@/functions/saveData';
 import { Icon } from '@iconify/react';
 import AlertSaving from '@/elements/AlertSaving';
+import InputDateReportFPP from './InputDateReportFPP';
+import ContTypeReport from './ContTypeReport';
 
 const FormReport = () => {
   const [status, setStatus] = useState(false);
@@ -32,7 +34,8 @@ const FormReport = () => {
       fluvial: '',
       citaProgramada: '',
       casaDePaso: '',
-      observaciones: ''
+      observaciones: '',
+      recibeLlamada: ''
     }
   );
 
@@ -41,6 +44,7 @@ const FormReport = () => {
     e.preventDefault();
     setSaving(true);
     await saveData(data).then((res)=>{
+      console.log(res);
       if(res.status === 200){
         setStatus(res.status);
         setSaving(false);
@@ -134,10 +138,10 @@ const FormReport = () => {
               />
             </div>
             <div className='w-6/12 overflow-hidden'>
-              <ContInputSelect
-                label='Prioritario'
-                id='prioritario'
-                setData={setData} 
+              <ContTypeReport
+                label='Tipo de Reporte'
+                id='tpReporte'
+                setData={setData}
               />
             </div>
           </div>
@@ -162,11 +166,12 @@ const FormReport = () => {
 
 
           <div className='flex gap-2 w-full'>
-            <div className='w-6/12 overflow-hidden'>
-              <ContInputSelect
-                label='Cita programada'
-                id='citaProgramada'
-                setData={setData} 
+            <div className='w-6/12'>
+              <ContInputText 
+                label='Quien recibe reporte'
+                placeholder='Escriba su nombre aqui'
+                id='recibeLlamada'
+                setData={setData}
               />
             </div>
             <div className='w-6/12 overflow-hidden'>

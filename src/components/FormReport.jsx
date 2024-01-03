@@ -35,15 +35,17 @@ const FormReport = () => {
       observaciones: ''
     }
   );
+
+
   const handleSubmit = async(e) => {
     e.preventDefault();
     setSaving(true);
     await saveData(data).then((res)=>{
       if(res.status === 200){
         setStatus(res.status);
+        setSaving(false);
         setTimeout(() => {
           window.location.reload();
-          setSaving(false);
         }, 3000);
       } else if(res.status !== 200){
         setStatus(res.status);
@@ -198,7 +200,7 @@ const FormReport = () => {
 
           {status === 200 ? 
             <AlertSaving
-              text='Guardado exitosamente'
+              text='Guardado exitosamente :)'
               colorIcon='2bd35e'
               icon='line-md:circle-to-confirm-circle-twotone-transition'
             />
@@ -208,7 +210,7 @@ const FormReport = () => {
               colorIcon='#e44444'
               icon='line-md:cancel-twotone'
             />
-          } 
+          }
         </form>
     </div>
   );

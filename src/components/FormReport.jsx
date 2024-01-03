@@ -13,6 +13,7 @@ import { Icon } from '@iconify/react';
 import AlertSaving from '@/elements/AlertSaving';
 import InputDateReportFPP from './InputDateReportFPP';
 import ContTypeReport from './ContTypeReport';
+import ContTypeTransport from './ContTypeTransport';
 
 const FormReport = () => {
   const [status, setStatus] = useState(false);
@@ -149,29 +150,10 @@ const FormReport = () => {
 
           <div className='flex gap-2 w-full'>
             <div className='w-6/12 overflow-hidden'>
-              <ContInputSelect
-                label='Transporte Terrestre'
-                id='terrestre'
+              <ContTypeTransport
+                label='Tipo de Transporte'
+                id='tpTransporte'
                 setData={setData} 
-              />
-            </div>
-            <div className='w-6/12 overflow-hidden'>
-              <ContInputSelect
-                label='Transporte Fluvial'
-                id='fluvial'
-                setData={setData} 
-              />
-            </div>
-          </div>
-
-
-          <div className='flex gap-2 w-full'>
-            <div className='w-6/12'>
-              <ContInputText 
-                label='Quien recibe reporte'
-                placeholder='Escriba su nombre aqui'
-                id='recibeLlamada'
-                setData={setData}
               />
             </div>
             <div className='w-6/12 overflow-hidden'>
@@ -181,6 +163,16 @@ const FormReport = () => {
                 setData={setData} 
               />
             </div>
+          </div>
+
+
+          <div className='w-full'>
+            <ContInputText 
+              label='Quien recibe reporte'
+              placeholder='Escriba su nombre aqui'
+              id='recibeLlamada'
+              setData={setData}
+            />
           </div>
 
           <div className='w-full'>

@@ -3,11 +3,15 @@ import React from 'react';
 import InputSelect from './InputSelect';
 import 'tailwindcss/tailwind.css';
 import TypeSex from './TypeSex';
+import ContInputText from './ContInputText';
+import ContInputSelect from './ContInputSelect';
 
 const FormReport = () => {
   const handleSubmit = () => {
 
   }
+
+  
   return (
     <div className='w-full '>
       <form className="flex justify-between flex-wrap gap-2">
@@ -17,21 +21,17 @@ const FormReport = () => {
           </div>
 
           <div className='w-8/12'>
-            <p>Documento:</p>
-              <input 
-                className='border-2 outline-gray-400 focus:shadow-md rounded py-1 px-2 w-full'
-                type="text"
-                placeholder="Escriba el documento"
-              />
+            <ContInputText 
+              label='Documento'
+              placeholder='Escriba documento'
+            />
           </div>
 
           <div className='w-full'>
-            <p>Nombres y Apellidos:</p>
-              <input 
-                className='border-2 outline-gray-400 focus:shadow-md rounded py-1 px-2 w-full'
-                type="text"
-                placeholder="Escriba los nombres y apellidos"
-              />
+            <ContInputText 
+              label='Nombres y Apellidos'
+              placeholder='Escriba nombres y apellidos'
+            />
           </div>
 
           <div className='flex gap-2 w-full'>
@@ -47,88 +47,64 @@ const FormReport = () => {
 
           <div className='flex gap-2 w-full'>
             <div className='w-6/12'>
-              <p>Resguardo:</p>
-              <input 
-                className='border-2 outline-gray-400 focus:shadow-md rounded py-1 px-2 w-full'
-                type="text"
-                placeholder="Escriba el Resguardo"
+              <ContInputText 
+                label='Resguardo'
+                placeholder='Resguardo'
               />
             </div>
             <div className='w-6/12'>
-              <p>Comunidad:</p>
-              <input 
-                className='border-2 outline-gray-400 focus:shadow-md rounded py-1 px-2 w-full'
-                type="text"
-                placeholder="Escriba el Comunidad"
+              <ContInputText 
+                label='Comunidad'
+                placeholder='Comunidad'
               />
             </div>
           </div>
 
           <div className='w-full'>
-            <p>Direccion:</p>
-              <input 
-                className='border-2 outline-gray-400 focus:shadow-md rounded py-1 px-2 w-full'
-                type="text"
-                placeholder="Escriba otra direccion"
+              <ContInputText 
+                label='Direccion'
+                placeholder='Direccion'
               />
           </div>
 
           <div className='flex gap-2 w-full'>
             <div className='w-6/12 overflow-hidden'>
-              <p>Acompañante:</p>
-              <select className='w-full border-2 py-1 rounded'>
-                <option value="">Selecione un opcion</option>
-                <option value="SI">SI</option>
-                <option value="NO">NO</option>
-              </select>
+              <ContInputSelect 
+                label='Acompañante'
+              />
             </div>
             <div className='w-6/12 overflow-hidden'>
-              <p>Prioritario:</p>
-              <select className='w-full border-2 py-1 rounded'>
-                <option value="">Selecione un opcion</option>
-                <option value="SI">SI</option>
-                <option value="NO">NO</option>
-              </select>
+              <ContInputSelect 
+                label='Prioritario'
+              />
             </div>
           </div>
 
 
           <div className='flex gap-2 w-full'>
             <div className='w-6/12 overflow-hidden'>
-              <p>Transporte terrestre:</p>
-              <select className='w-full border-2 py-1 rounded'>
-                <option value="">Selecione un opcion</option>
-                <option value="SI">SI</option>
-                <option value="NO">NO</option>
-              </select>
+              <ContInputSelect 
+                label='Transporte Terrestre'
+              />
             </div>
             <div className='w-6/12 overflow-hidden'>
-              <p>Transporte Fluvial:</p>
-              <select className='w-full border-2 py-1 rounded'>
-                <option value="">Selecione un opcion</option>
-                <option value="SI">SI</option>
-                <option value="NO">NO</option>
-              </select>
+              <ContInputSelect 
+                label='Transporte Fluvial'
+              />
             </div>
           </div>
 
 
           <div className='flex gap-2 w-full'>
             <div className='w-6/12 overflow-hidden'>
-              <p>Cita programada:</p>
-              <select className='w-full border-2 py-1 rounded'>
-                <option value="">Selecione un opcion</option>
-                <option value="SI">SI</option>
-                <option value="NO">NO</option>
-              </select>
+              <ContInputSelect 
+                label='Cita programada'
+              />
             </div>
             <div className='w-6/12 overflow-hidden'>
-              <p>Casa de paso:</p>
-              <select className='w-full border-2 py-1 rounded'>
-                <option value="">Selecione un opcion</option>
-                <option value="SI">SI</option>
-                <option value="NO">NO</option>
-              </select>
+              <ContInputSelect 
+                label='Casa de paso'
+              />
             </div>
           </div>
 

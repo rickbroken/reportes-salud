@@ -2,7 +2,7 @@
 const nextConfig = {
   images: {
     optimizeImages: false
-  },
+  }
 }
 
 module.exports = nextConfig

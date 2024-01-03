@@ -1,29 +1,52 @@
 'use client'
-import React from 'react';
-import InputSelect from './InputSelect';
+import React, { useState } from 'react';
+import InputSelectTpDoc from './InputSelectTpDoc';
 import 'tailwindcss/tailwind.css';
 import TypeSex from './TypeSex';
 import ContInputText from './ContInputText';
 import ContInputSelect from './ContInputSelect';
+import InputTextarea from './InputTextarea';
 
 const FormReport = () => {
-  const handleSubmit = () => {
+  const [data, setData] = useState(
+    {
+      tpDoc: '',
+      documento: '',
+      nombYApell:'',
+      sexo: '',
+      fechaReporte: '',
+      resguardo: '',
+      comunidad: '',
+      direccion: '',
+      acompanante: '',
+      prioritario: '',
+      terrestre: '',
+      fluvial: '',
+      citaProgramada: '',
+      casaDePaso: '',
+      observaciones: ''
+    }
+  );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(data);
+  };
 
-  }
 
-  
   return (
     <div className='w-full '>
-      <form className="flex justify-between flex-wrap gap-2">
+      <form onSubmit={handleSubmit} className="flex justify-between flex-wrap gap-2">
           <div className='w-3/12 overflow-hidden'>
             <p>TP:</p>
-              <InputSelect />
+              <InputSelectTpDoc setData={setData} />
           </div>
 
           <div className='w-8/12'>
             <ContInputText 
               label='Documento'
               placeholder='Escriba documento'
+              id='documento'
+              setData={setData}
             />
           </div>
 
@@ -31,13 +54,15 @@ const FormReport = () => {
             <ContInputText 
               label='Nombres y Apellidos'
               placeholder='Escriba nombres y apellidos'
+              id='nombYApell'
+              setData={setData}
             />
           </div>
 
           <div className='flex gap-2 w-full'>
             <div className='w-6/12 overflow-hidden'>
               <p>Sexo:</p>
-                <TypeSex />
+                <TypeSex setData={setData} />
             </div>
             <div className='w-6/12 overflow-hidden'>
               <p>Fecha de reporte:</p>
@@ -50,12 +75,16 @@ const FormReport = () => {
               <ContInputText 
                 label='Resguardo'
                 placeholder='Resguardo'
+                id='resguardo'
+                setData={setData}
               />
             </div>
             <div className='w-6/12'>
               <ContInputText 
                 label='Comunidad'
                 placeholder='Comunidad'
+                id='comunidad'
+                setData={setData}
               />
             </div>
           </div>
@@ -64,18 +93,24 @@ const FormReport = () => {
               <ContInputText 
                 label='Direccion'
                 placeholder='Direccion'
+                id='direccion'
+                setData={setData}
               />
           </div>
 
           <div className='flex gap-2 w-full'>
             <div className='w-6/12 overflow-hidden'>
-              <ContInputSelect 
+              <ContInputSelect
                 label='Acompañante'
+                id='acompanante'
+                setData={setData} 
               />
             </div>
             <div className='w-6/12 overflow-hidden'>
-              <ContInputSelect 
+              <ContInputSelect
                 label='Prioritario'
+                id='prioritario'
+                setData={setData} 
               />
             </div>
           </div>
@@ -83,13 +118,17 @@ const FormReport = () => {
 
           <div className='flex gap-2 w-full'>
             <div className='w-6/12 overflow-hidden'>
-              <ContInputSelect 
+              <ContInputSelect
                 label='Transporte Terrestre'
+                id='terrestre'
+                setData={setData} 
               />
             </div>
             <div className='w-6/12 overflow-hidden'>
-              <ContInputSelect 
+              <ContInputSelect
                 label='Transporte Fluvial'
+                id='fluvial'
+                setData={setData} 
               />
             </div>
           </div>
@@ -97,24 +136,25 @@ const FormReport = () => {
 
           <div className='flex gap-2 w-full'>
             <div className='w-6/12 overflow-hidden'>
-              <ContInputSelect 
+              <ContInputSelect
                 label='Cita programada'
+                id='citaProgramada'
+                setData={setData} 
               />
             </div>
             <div className='w-6/12 overflow-hidden'>
-              <ContInputSelect 
+              <ContInputSelect
                 label='Casa de paso'
+                id='casaDePaso'
+                setData={setData} 
               />
             </div>
           </div>
 
           <div className='w-full'>
-            <p>Observaciones:</p>
-              <textarea 
-                className='border-2 outline-gray-400 focus:shadow-md rounded py-1 px-2 w-full min-h-24 max-h-28'
-                type="text"
-                placeholder="Escriba sus observaciones..."
-              ></textarea>
+            <InputTextarea 
+              setData={setData}
+            />
           </div>
 
           <div className='w-full pt-6 pb-4 flex justify-center'>

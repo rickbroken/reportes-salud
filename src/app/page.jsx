@@ -1,6 +1,4 @@
 import 'tailwindcss/tailwind.css';
-import InputSelect from "../components/InputSelect";
-import TypeSex from '../components/TypeSex';
 import Header from '@/components/Header';
 import FormReport from '@/components/FormReport';
 

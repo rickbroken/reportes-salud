@@ -1,9 +1,18 @@
 import React from 'react';
 import 'tailwindcss/tailwind.css';
 
-const InputSelect = () => {
+const InputSelectTpDoc = ({setData}) => {
+  const handleTpDoc = (e) => {
+    setData((prevData)=>(
+      {
+        ...prevData,
+        tpDoc: e.target.value
+      }
+    ))
+  } 
+
   return (
-    <select className='w-full border-2 py-1 rounded'>
+    <select onChange={handleTpDoc} className='w-full border-2 py-1 rounded'>
       <option value="">Selecione un documento</option>
       <option value="CN">CN</option>
       <option value="RC">RC</option>
@@ -14,4 +23,4 @@ const InputSelect = () => {
   );
 }
  
-export default InputSelect;
+export default InputSelectTpDoc;

@@ -16,9 +16,9 @@ const ContTypeTransport = ({label,id,setData}) => {
       <p>{label}:</p>
       <select id={id} onChange={handleInputSelect} className='w-full border-2 py-1 rounded'>
         <option value="">Selecione un opcion</option>
-        <option value="rural">Rural</option>
-        <option value="fluvial">Fluvial</option>
-        <option value="intermunicipal">Intermunicipal</option>
+        <option value="Rural">Rural</option>
+        <option value="Fluvial">Fluvial</option>
+        <option value="Intermunicipal">Intermunicipal</option>
       </select>
     </>
   );

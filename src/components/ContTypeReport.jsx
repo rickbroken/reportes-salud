@@ -16,10 +16,10 @@ const ContTypeReport = ({label,id,setData}) => {
       <p>{label}:</p>
       <select id={id} onChange={handleInputSelect} className='w-full border-2 py-1 rounded'>
         <option value="">Selecione un opcion</option>
-        <option value="prioritario">Prioritario</option>
+        <option value="Prioritario">Prioritario</option>
         <option value="FPP">FPP</option>
-        <option value="especialidad">Especialidad</option>
-        <option value="citaProgramada">Cita Programada</option>
+        <option value="Especialidad">Especialidad</option>
+        <option value="Cita Programada">Cita Programada</option>
       </select>
     </>
   );

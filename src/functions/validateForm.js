@@ -39,6 +39,22 @@ export const validateForm = async(setIncomplete,setSaving,data) => {
       return true;
     }, 2000);
     return false;
+  } else if(data.acompanante === ''){
+    setIncomplete({status: true, text: 'Seleccione si requiere acompañante'});
+    setTimeout(() => {
+      setIncomplete({status: false, text: ''});
+      setSaving(false);
+      return true;
+    }, 2000);
+    return false;
+  } else if(data.casaDePaso === ''){
+    setIncomplete({status: true, text: 'Seleccione si requiere Casa de Paso'});
+    setTimeout(() => {
+      setIncomplete({status: false, text: ''});
+      setSaving(false);
+      return true;
+    }, 2000);
+    return false;
   } else {
     return true;
   }

@@ -15,6 +15,7 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@iconify/icons-line-md": "^1.2.30",
     "@iconify/react": "^4.1.1",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",

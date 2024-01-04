@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import InputSelectTpDoc from './InputSelectTpDoc';
 import 'tailwindcss/tailwind.css';
 import TypeSex from './TypeSex';
@@ -11,13 +11,21 @@ import InputDateReport from './InputDateReport';
 import { saveData } from '@/functions/saveData';
 import { Icon } from '@iconify/react';
 import AlertSaving from '@/elements/AlertSaving';
-import InputDateReportFPP from './InputDateReportFPP';
 import ContTypeReport from './ContTypeReport';
 import ContTypeTransport from './ContTypeTransport';
+import AlertIncomplete from '@/elements/AlertIncomplete';
+import { validateForm } from '@/functions/validateForm';
+import circleTwotoneToConfirmCircleTwotoneTransition from '@iconify/icons-line-md/circle-twotone-to-confirm-circle-twotone-transition';
+import cancelTwotone from '@iconify/icons-line-md/cancel-twotone';
+import loadingTwotoneLoop from '@iconify/icons-line-md/loading-twotone-loop';
 
 const FormReport = () => {
   const [status, setStatus] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [incomplete, setIncomplete] = useState({
+    status: false,
+    text: ''
+  })
 
   const [data, setData] = useState(
     {
@@ -43,24 +51,27 @@ const FormReport = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    setSaving(true);
-    await saveData(data).then((res)=>{
-      console.log(res);
-      if(res.status === 200){
-        setStatus(res.status);
-        setSaving(false);
-        setTimeout(() => {
+    
+    const validarForm = await validateForm(setIncomplete,setSaving,data);
+    
+    if(validarForm){
+      setSaving(true);
+      await saveData(data).then((res)=>{
+        if(res?.status === 200){
+          setStatus(res?.status);
+          setSaving(false);
+          setTimeout(() => {
           window.location.reload();
-        }, 3000);
-      } else if(res.status !== 200){
-        setStatus(res.status);
-        setSaving(false);
-        setTimeout(() => {
-          setStatus(false);
-        }, 3000);
-      }
-    })
-
+          }, 3000);
+        } else if(res?.status !== 200){
+          setStatus(res?.status);
+          setSaving(false);
+          setTimeout(() => {
+            setStatus(false);
+          }, 3000);
+        }
+      }).catch((err)=>console.log(err));
+    }
   };
 
 
@@ -188,24 +199,28 @@ const FormReport = () => {
               type='submit'
             >
               {saving ?
-                <Icon width={25} color='white' icon="line-md:loading-twotone-loop" />
+                <Icon width={25} color='white' icon={loadingTwotoneLoop} />
                 :
                 'Enviar'
               }
             </button>
           </div>
 
+          {incomplete.status &&
+            <AlertIncomplete text={incomplete.text} />
+          }
+
           {status === 200 ? 
             <AlertSaving
               text='Guardado exitosamente :)'
               colorIcon='2bd35e'
-              icon='line-md:circle-to-confirm-circle-twotone-transition'
+              icon={circleTwotoneToConfirmCircleTwotoneTransition}
             />
             : status !== false && status !== 200 &&
             <AlertSaving
               text='Hubo un error al intentar enviar, guarde la informacion e intente mas tarde'
               colorIcon='#e44444'
-              icon='line-md:cancel-twotone'
+              icon={cancelTwotone}
             />
           }
         </form>
